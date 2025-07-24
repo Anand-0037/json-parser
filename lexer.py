@@ -29,15 +29,12 @@ class Lexer:
     
     def tokenize(self) -> List[Token]:
         tokens = []
-        
         while self.pos < len(self.text):
             self.skip_whitespace()
             if self.pos >= len(self.text):
                 break
             
             char = self.current_char()
-            
-            # Single character tokens
             single_chars = {
                 '{': TokenType.LEFT_BRACE,
                 '}': TokenType.RIGHT_BRACE,
@@ -46,7 +43,6 @@ class Lexer:
                 ',': TokenType.COMMA,
                 ':': TokenType.COLON
             }
-            
             if char in single_chars:
                 tokens.append(Token(single_chars[char], char, self.line))
                 self.advance()
@@ -82,46 +78,35 @@ class Lexer:
             self.advance()
     
     def read_string(self) -> Token:
-        self.advance()  # Skip opening quote
+        self.advance()  
         start = self.pos
-        
         while self.pos < len(self.text) and self.current_char() != '"':
             if self.current_char() == '\\':
-                self.advance()  # Skip escape character
+                self.advance()  
             self.advance()
-        
         if self.pos >= len(self.text):
             raise ValueError(f"Unterminated string at line {self.line}")
         
         value = self.text[start:self.pos]
-        # Handle basic escape sequences
         value = value.replace('\\n', '\n').replace('\\t', '\t').replace('\\"', '"').replace('\\\\', '\\')
-        
-        self.advance()  # Skip closing quote
+        self.advance()
         return Token(TokenType.STRING, value, self.line)
     
     def read_number(self) -> Token:
         start = self.pos
-        
         if self.current_char() == '-':
             self.advance()
-        
-        # Read integer part
         if not self.current_char().isdigit():
             raise ValueError(f"Invalid number at line {self.line}")
         
         while self.pos < len(self.text) and self.current_char().isdigit():
             self.advance()
-        
-        # Read decimal part if present
         if self.pos < len(self.text) and self.current_char() == '.':
             self.advance()
             if not self.current_char().isdigit():
                 raise ValueError(f"Invalid number at line {self.line}")
             while self.pos < len(self.text) and self.current_char().isdigit():
                 self.advance()
-        
-        # Read exponent part if present
         if self.pos < len(self.text) and self.current_char().lower() == 'e':
             self.advance()
             if self.current_char() in '+-':
@@ -136,5 +121,4 @@ class Lexer:
             value = int(number_str) if '.' not in number_str and 'e' not in number_str.lower() else float(number_str)
         except ValueError:
             raise ValueError(f"Invalid number '{number_str}' at line {self.line}")
-        
         return Token(TokenType.NUMBER, value, self.line)
