@@ -1,1 +1,5 @@
 .personal.md
+__pycache__/
+*.pyc
+.gitignore
+.venv/
