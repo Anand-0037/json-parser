@@ -9,13 +9,19 @@ A cli tool for lexical and syntactical analysis. It parses json files.
 - Parser --> Builds python objects fro tokens.
 - CLI Interface --> Validating json files from cli.
 - Error messages with line numbers
-- include support for comments also. (j'//' and '/* any content */')
+- include support for comments also. ('//' and '/* any content */')
 - Uploaded on pypi [PyPI package](https://pypi.org/project/json-parser-cli/)
 - No runtime dependencies required.
 
 ## Installation
 ```bash
 pip install json-parser-cli
+```
+
+## How to use
+use ```json-parser``` command to validate json files.
+```bash
+json-parser <file_name.json>
 ```
 
 ## Learnings
@@ -30,16 +36,6 @@ How compiler works
 - Null, nested structures, etc.
 - comments, 
 
-### Installation
-uploaded on PyPI
-```bash
-pip install json-parser-cli
-```
-## How to use
-use ```json-parser``` command to validate json files.
-```bash
-json-parser <file.json>
-```
 
 <!-- 
 ### For my testing
