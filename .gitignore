@@ -1,5 +1,10 @@
+dist/
+.venv/
+
 .personal.md
 __pycache__/
 *.pyc
 .gitignore
 .venv/
+.personal.md
+.python-version
