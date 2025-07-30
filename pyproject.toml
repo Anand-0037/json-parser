@@ -1,6 +1,6 @@
 [project]
 name = "json-parser-cli"  
-version = "0.1.0"
+version = "0.1.1"
 description = "A JSON parser and CLI tool (learning purpose)"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -25,7 +25,6 @@ json-parser = "json_parser.json_parser:main"
 
 [project.urls]
 Repository = "https://github.com/Anand-0037/json-parser"
-Issues = "https://github.com/Anand-0037/json-parser/issues"
 
 [build-system]
 requires = ["hatchling"]
