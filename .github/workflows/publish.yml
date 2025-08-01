@@ -1,0 +1,28 @@
+name: Upload Python Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: python -m pip install --upgrade pip build
+    - name: Build package
+      run: python -m build
+    - name: Publish package to GitHub Packages
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository_url: https://pypi.pkg.github.com/Anand-0037
+        user: __token__
+        password: ${{ secrets.GITHUB_TOKEN }}
