@@ -1,4 +1,4 @@
-name: Upload Python Package
+name: Build and Publish to GitHub Packages
 
 on:
   release:
@@ -23,6 +23,6 @@ jobs:
     - name: Publish package to GitHub Packages
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        repository_url: https://pypi.pkg.github.com/Anand-0037
+        repository_url: https://pypi.pkg.github.com/
         user: __token__
         password: ${{ secrets.GITHUB_TOKEN }}
